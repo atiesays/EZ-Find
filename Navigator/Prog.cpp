@@ -1,8 +1,12 @@
 //FIle Mover/deletion/copier
 #include <iostream>
+
 #include <fstream>
+
 #include <cstdlib>
+
 #include <filesystem>
+
 #include <string>
 
 using namespace std;
@@ -35,27 +39,27 @@ void operate(string path) {
 }
 //Function that copies file(s)
 void fileCopy(string file) {
-	string destination = file + ".copy";
-	try {
-		std::filesystem::copy(file, destination);
-	} catch (std::filesystem::filesystem_error& e) {
-		std::cout << e.what() << '\n';
-	}
-    cout<<file<<" has been copied to " << destination << endl;
+    string destination = file + ".copy";
+    try {
+        std::filesystem::copy(file, destination);
+    } catch (std::filesystem::filesystem_error & e) {
+        std::cout << e.what() << '\n';
+    }
+    cout << file << " has been copied to " << destination << endl;
 }
 //Function that moves file(s)
 void fileMove(string file) {
     string destination;
-    cout<<"Where would you like "<<file<<" moved to?";
-    cin>>destination;
-    
-	try {
-		std::filesystem::copy(file, destination);
-		std::filesystem::remove(file);
-	} catch (std::filesystem::filesystem_error& e) {
-		std::cout << e.what() << '\n';
-	}
-    cout<<file<<" has been moved to " << destination << "."<<endl;
+    cout << "Where would you like " << file << " moved to?";
+    cin >> destination;
+
+    try {
+        std::filesystem::copy(file, destination);
+        std::filesystem::remove(file);
+    } catch (std::filesystem::filesystem_error & e) {
+        std::cout << e.what() << '\n';
+    }
+    cout << file << " has been moved to " << destination << "." << endl;
 }
 //Function that deletes file(s)
 void fileDelete(string file) {
@@ -67,23 +71,20 @@ void fileDelete(string file) {
         cout << file << " has been deleted." << endl;
 }
 
-
-int main()
-{
+int main() {
     int choi;
     string path;
 
-
     //user is welcomed and navigation begins
-    cout << "Welcome to Ez Find" << endl
-        << "Please enter a directory path" << endl;
+    cout << "Welcome to Ez Find" << endl <<
+        "Please enter a directory path" << endl;
     cin >> path;
 
     //The path is taken and followed and choices are presented
     // Navigate to a path and list files under the path
 
     cout << "Which files would you like to target?" << endl;
-    for (const auto& entry : fs::directory_iterator(path)) {
+    for (const auto & entry: fs::directory_iterator(path)) {
         cout << entry.path() << std::endl;
         cout << "To choose press 1, to skip press 2, to exit press 3:" << endl;
         cin >> choi;
